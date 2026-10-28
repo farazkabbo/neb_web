@@ -10,6 +10,9 @@ const schema = z.object({
   company: z.string().optional(), // honeypot
 });
 
+// Run next to the Supabase database (Central EU, Frankfurt): a central point for a worldwide audience.
+export const preferredRegion = "fra1";
+
 const WINDOW_MS = 10 * 60 * 1000;
 const hits = new Map<string, number[]>();
 
