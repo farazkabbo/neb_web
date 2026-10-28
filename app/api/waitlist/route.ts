@@ -54,8 +54,8 @@ export async function POST(req: Request) {
   if (contact.error) console.error("resend contact", contact.error);
 
   const lines = ["Something new is coming to your notebook. We'll tell you first.", "— neb"];
-  if (source === "send-to-me") lines.splice(1, 0, `Open neb on your computer: ${new URL(req.url).origin}`);
-  const sent = await resend.emails.send({ from: RESEND_FROM, to: email, subject: "You're on the list.", text: lines.join("\n\n") });
+  if (source === "send-to-me") lines.splice(1, 0, `Open neb on your computer: ${process.env.NEXT_PUBLIC_SITE_URL || new URL(req.url).origin}`);
+  const sent = await resend.emails.send({ from: RESEND_FROM, to: email, subject: "You're on the list.", text: lines.join("\n\n"), replyTo: process.env.RESEND_REPLY_TO || undefined });
   if (sent.error) console.error("resend email", sent.error);
 
   return ok();

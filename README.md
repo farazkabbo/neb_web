@@ -64,3 +64,17 @@ Until it runs, the site uses placeholder brand SVGs and empty video frames. Gene
 1. Set `NEXT_PUBLIC_LAUNCH_VIDEO_URL` to the film URL.
 2. Redeploy. The tablet dialog becomes "it's here" with "▶ play the launch film".
 3. Send the Resend Broadcast to `RESEND_AUDIENCE_ID`.
+
+## Going live on myneb.si
+
+Contact inbox: **mynebsi@gmail.com** (replies to waitlist emails land here via `RESEND_REPLY_TO`).
+
+1. **Supabase**: sign in with mynebsi@gmail.com, create a project, run the `waitlist` SQL above. Copy *Project URL* → `SUPABASE_URL` and *service_role key* (Settings → API) → `SUPABASE_SERVICE_ROLE_KEY`.
+2. **Resend**: sign up with mynebsi@gmail.com → Domains → add `myneb.si`. Resend shows DNS records (MX + TXT for SPF on `send`, TXT for DKIM `resend._domainkey`). In **Wix → Domains → myneb.si → Manage DNS records**, add each one exactly. Wait until Resend says *Verified*. Then create an API key → `RESEND_API_KEY`, and an Audience → `RESEND_AUDIENCE_ID`.
+3. **GitHub**: push this repo.
+4. **Vercel**: sign in, *Add New → Project*, import the repo. Add all env vars from `.env.example` (filled in). Deploy.
+5. **Domain**: Vercel → Project → Settings → Domains → add `myneb.si` and `www.myneb.si`. Vercel shows the records; in Wix DNS set:
+   - `A` record, host `@` → `76.76.21.21`
+   - `CNAME` record, host `www` → `cname.vercel-dns.com`
+   (Delete Wix's existing `A`/`CNAME` for `@`/`www` first.) SSL is automatic once DNS resolves.
+6. Test: submit your own email on https://myneb.si → row in Supabase, contact in the Audience, confirmation email in the inbox.
