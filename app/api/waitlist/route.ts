@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
+import { confirmationEmail } from "@/lib/email";
 
 const schema = z.object({
   email: z.string().trim().toLowerCase().email().max(254),
@@ -37,7 +38,7 @@ export async function POST(req: Request) {
   if (company) return ok();
 
   const { SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, RESEND_API_KEY, RESEND_AUDIENCE_ID, RESEND_FROM } = process.env;
-  if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY || !RESEND_API_KEY || !RESEND_AUDIENCE_ID || !RESEND_FROM) {
+  if (!SUPABASE_URL || !SUPABASE_SERVICE_ROLE_KEY || !RESEND_API_KEY || !RESEND_FROM) {
     return fail("The waitlist isn't plugged in yet.", 500);
   }
 
@@ -53,12 +54,16 @@ export async function POST(req: Request) {
   if (!data?.length) return NextResponse.json({ ok: true, duplicate: true }, { status: 409 }); // already on the list
 
   const resend = new Resend(RESEND_API_KEY);
-  const contact = await resend.contacts.create({ email, audienceId: RESEND_AUDIENCE_ID, unsubscribed: false });
-  if (contact.error) console.error("resend contact", contact.error);
+  // Newer Resend accounts have one account-wide audience (no ID); older ones use a per-audience ID.
+  const contact = await fetch(RESEND_AUDIENCE_ID ? `https://api.resend.com/audiences/${RESEND_AUDIENCE_ID}/contacts` : "https://api.resend.com/contacts", {
+    method: "POST",
+    headers: { Authorization: `Bearer ${RESEND_API_KEY}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ email, unsubscribed: false }),
+  }).catch((e) => e);
+  if (!(contact instanceof Response) || !contact.ok) console.error("resend contact", contact instanceof Response ? await contact.text() : contact);
 
-  const lines = ["Something new is coming to your notebook. We'll tell you first.", "— neb"];
-  if (source === "send-to-me") lines.splice(1, 0, `Open neb on your computer: ${process.env.NEXT_PUBLIC_SITE_URL || new URL(req.url).origin}`);
-  const sent = await resend.emails.send({ from: RESEND_FROM, to: email, subject: "You're on the list.", text: lines.join("\n\n"), replyTo: process.env.RESEND_REPLY_TO || undefined });
+  const mail = confirmationEmail(process.env.NEXT_PUBLIC_SITE_URL || new URL(req.url).origin, source === "send-to-me");
+  const sent = await resend.emails.send({ from: RESEND_FROM, to: email, ...mail, replyTo: process.env.RESEND_REPLY_TO || undefined });
   if (sent.error) console.error("resend email", sent.error);
 
   return ok();
