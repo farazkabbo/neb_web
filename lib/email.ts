@@ -33,7 +33,7 @@ export function confirmationEmail(site: string, sendToMe: boolean) {
   </table>
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:480px;">
     <tr><td style="padding:20px 16px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.6;color:#6E6A60;text-align:center;">
-      ${FOOTER}<br>${ADDRESS}<br><a href="${site}" style="color:#6E6A60;">myneb.si</a>
+      ${FOOTER}<br>${ADDRESS}<br><a href="${site}" style="color:#6E6A60;">myneb.si</a> · <a href="${site}/privacy" style="color:#6E6A60;">privacy</a>
     </td></tr>
   </table>
 </td></tr>
