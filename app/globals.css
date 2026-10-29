@@ -248,10 +248,3 @@ footer a{color:inherit}
 .legal-meta{font:400 13px var(--f-body);color:var(--muted)}
 .legal-back{font:500 13px var(--f-body);text-decoration:none}
 
-/* founders' signature: overlapping avatars */
-.sig .avs{display:flex;flex:none}
-.sig .avs .av{border:2px solid #fff;margin-left:-10px}
-.sig .avs .av:first-child{margin-left:0}
-.sig .avs .av:nth-child(2){background:var(--violet)}
-.sig .avs .av:nth-child(3){background:#BDB4A2}
-.sig span{line-height:1.3}
