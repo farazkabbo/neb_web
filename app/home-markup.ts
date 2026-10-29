@@ -118,7 +118,7 @@ export const HOME_HTML = String.raw`<svg width="0" height="0" style="position:ab
         </div></div>
     </div>
   </div></section>
-  <footer><svg class="mk"><use href="#mk"/></svg><p class="see">See you on launch day.</p><nav><a href="/privacy">privacy</a><a href="#">instagram</a><a href="#">x</a><a href="#">tiktok</a></nav>© 2026 neb</footer>
+  <footer><svg class="mk"><use href="#mk"/></svg><p class="see">See you on launch day.</p><nav><a href="/privacy">privacy</a><a href="https://www.instagram.com/neb_2026/" target="_blank" rel="noopener">instagram</a><a href="#">x</a><a href="#">tiktok</a></nav>© 2026 neb</footer>
 </main>
 
 `;
