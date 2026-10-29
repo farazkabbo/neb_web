@@ -105,9 +105,9 @@ export const HOME_HTML = String.raw`<svg width="0" height="0" style="position:ab
     </div>
 
     <div class="notes">
-      <div class="win"><div class="tb sand"><b>from_faraz.txt</b><span class="ctl"><i>_</i><i>×</i></span></div>
-        <div class="pad"><p>hey, i'm faraz.</p><p>every AI i used gave me the answer. <mark>none of it stayed.</mark></p><p>so i'm building neb, a tutor that lives in your notebook and won't let you skip the thinking.</p><p>it's early. join the waitlist and you'll be first in.</p>
-          <div class="sig"><span class="av">f</span><span>faraz, founder</span><b>neb</b></div></div></div>
+      <div class="win"><div class="tb sand"><b>from_the_founders.txt</b><span class="ctl"><i>_</i><i>×</i></span></div>
+        <div class="pad"><p>hey, we're faraz, rahbir and rubaiya.</p><p>every AI we used gave us the answer. <mark>none of it stayed.</mark></p><p>so we're building neb, a tutor that lives in your notebook and won't let you skip the thinking.</p><p>it's early. join the waitlist and you'll be first in.</p>
+          <div class="sig"><span class="avs"><span class="av">f</span><span class="av">r</span><span class="av">r</span></span><span>faraz, rahbir &amp; rubaiya<br>founders</span><b>neb</b></div></div></div>
       <div class="win"><div class="tb teal"><b>readme.txt</b><span class="ctl"><i>_</i><i>×</i></span></div>
         <div class="pad faq">
           <details open><summary>what is neb?</summary><p>a tutor that makes sure you learn it, not just get it.</p></details>
