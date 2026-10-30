@@ -60,7 +60,7 @@ export const HOME_HTML = String.raw`<svg width="0" height="0" style="position:ab
         <svg class="wm" aria-label="neb"><use href="#wm"/></svg>
         <h1>Don't just get the answer. Learn it.</h1>
         <p class="sub">a tutor that lives in your notebook.</p>
-        <form class="wl" id="f-hero" novalidate><label class="sr" for="e-hero">email</label><input id="e-hero" type="email" placeholder="you@school.edu" autocomplete="email" required><button class="btn go" id="b-hero">join the waitlist</button></form>
+        <form class="wl" id="f-hero" novalidate><label class="sr" for="e-hero">email</label><input id="e-hero" type="email" placeholder="you@email.com" autocomplete="email" required><button class="btn go" id="b-hero">join the waitlist</button></form>
         <p class="micro" id="m-hero">free at launch. we email you once, on launch day.</p>
         <p class="mobsend">on your phone? <button type="button" id="sendme">send this to your laptop</button></p>
         <div class="hint"><span><span class="arr">↓</span> scroll to watch 11:47 pm</span><button type="button" data-go="#launch">skip the story</button></div>
@@ -97,7 +97,7 @@ export const HOME_HTML = String.raw`<svg width="0" height="0" style="position:ab
             <h3>Welcome to neb setup.</h3>
             <p>This puts you on the waitlist. We'll email you once, on launch day, with your invite.</p>
             <form id="f-wiz" novalidate><label for="e-wiz">your email</label>
-              <div class="wl"><input id="e-wiz" type="email" placeholder="you@school.edu" autocomplete="email" required></div>
+              <div class="wl"><input id="e-wiz" type="email" placeholder="you@email.com" autocomplete="email" required></div>
               <p class="priv"><span>ⓘ</span><span>neb only looks when you ask. your notes stay yours. we only email you about neb.</span></p>
               <div class="wbtns"><button class="btn" type="button" disabled>&lt; back</button><button class="btn go" id="b-wiz">install &gt;</button><button class="btn" type="button" id="cancel">cancel</button></div>
             </form>
