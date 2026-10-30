@@ -63,8 +63,12 @@ export async function POST(req: Request) {
   if (!(contact instanceof Response) || !contact.ok) console.error("resend contact", contact instanceof Response ? await contact.text() : contact);
 
   const mail = confirmationEmail(process.env.NEXT_PUBLIC_SITE_URL || new URL(req.url).origin, source === "send-to-me");
-  const sent = await resend.emails.send({ from: RESEND_FROM, to: email, ...mail, replyTo: process.env.RESEND_REPLY_TO || undefined });
-  if (sent.error) console.error("resend email", sent.error);
+  const sent = await resend.emails.send({ from: RESEND_FROM, to: email, ...mail, replyTo: process.env.RESEND_REPLY_TO || undefined }).catch((error) => ({ error }));
+  if (sent.error) {
+    // The signup is already saved, so keep it and tell the form the email didn't go out.
+    console.error("resend email", sent.error);
+    return NextResponse.json({ ok: true, emailed: false }, { status: 201 });
+  }
 
   return ok();
 }

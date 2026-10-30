@@ -127,7 +127,7 @@ document.addEventListener('click',e=>{const g=e.target.closest('[data-go]');if(g
 const ok=v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
 async function join(email,source){
   try{const r=await fetch('/api/waitlist',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({email,source})});
-    if(r.status===409)return'dup';return r.ok?'ok':'err'}catch(e){return'err'}
+    if(r.status===409)return'dup';if(!r.ok)return'err';const j=await r.json().catch(()=>({}));return j.emailed===false?'noemail':'ok'}catch(e){return'err'}
 }
 let heroSource='hero';
 $('#sendme').addEventListener('click',()=>{heroSource='send-to-me';$('#b-hero').textContent='send it to me';$('#m-hero').textContent="we'll email you a link to open on your laptop.";$('#e-hero').focus()});
@@ -135,7 +135,7 @@ $('#f-hero').addEventListener('submit',async e=>{e.preventDefault();const i=$('#
   if(!ok(i.value.trim())){m.textContent='that email looks off. check it and try again.';i.focus();return}
   b.disabled=true;b.textContent='joining…';const res=await join(i.value.trim(),heroSource);
   if(res==='err'){b.disabled=false;b.textContent=heroSource==='send-to-me'?'send it to me':'join the waitlist';m.textContent="couldn't save that. check the email and try again.";return}
-  const msg=heroSource==='send-to-me'?'✓ sent. open the link on your laptop.':res==='dup'?"✓ you're already on the list.":"✓ you're on the list. we'll email you on launch day.";
+  const msg=res==='noemail'?"✓ you're on the list, but we couldn't send your email. we'll email you on launch day.":heroSource==='send-to-me'&&res==='ok'?'✓ sent. open the link on your laptop.':res==='dup'?"✓ you're already on the list.":"✓ you're on the list. we'll email you on launch day.";
   e.target.outerHTML=`<p class="done">${msg}</p>`;m.textContent='free at launch.'});
 document.addEventListener('click',e=>{const c=e.target.closest('#cancel');if(c){c.textContent='nice try';setTimeout(()=>c.textContent='cancel',1400)}});
 document.addEventListener('submit',async e=>{if(e.target.id!=='f-wiz')return;e.preventDefault();const i=$('#e-wiz'),email=i.value.trim();
@@ -146,7 +146,7 @@ document.addEventListener('submit',async e=>{if(e.target.id!=='f-wiz')return;e.p
   for(let s=0;s<steps.length;s++){$('#pl').innerHTML+=steps[s]+'<br>';$('#pb').style.width=((s+1)/steps.length*100)+'%';await new Promise(r=>setTimeout(r,600))}
   const res=await req;
   if(res==='err'){wz.innerHTML=keep;const f=$('#f-wiz');if(f){f.querySelector('input').value=email;const p=document.createElement('p');p.className='err-line';p.textContent="couldn't save that. check the email and try again.";f.querySelector('.wl').after(p)}return}
-  wz.innerHTML=`<h3>neb is ready for launch day.</h3><p>${res==='dup'?"You're already on the list. ":"You're on the waitlist. Check your inbox for a confirmation. "}Your invite and the launch film arrive together.</p><div class="wbtns"><button class="btn go" type="button" data-go="#story">finish</button></div>`});
+  wz.innerHTML=`<h3>neb is ready for launch day.</h3><p>${res==='dup'?"You're already on the list. ":res==='noemail'?"You're on the waitlist, but we couldn't send your confirmation email. ":"You're on the waitlist. Check your inbox for a confirmation. "}Your invite and the launch film arrive together.</p><div class="wbtns"><button class="btn go" type="button" data-go="#story">finish</button></div>`});
 
 /* ----- launch tablet ----- */
 const LAUNCH=(ROOT&&ROOT.dataset.launch)||'';
