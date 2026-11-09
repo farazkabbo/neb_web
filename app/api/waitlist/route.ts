@@ -3,6 +3,7 @@ import { z } from "zod";
 import { createClient } from "@supabase/supabase-js";
 import { Resend } from "resend";
 import { confirmationEmail } from "@/lib/email";
+import { clientIp, formLimitByIp } from "@/lib/limits";
 
 const schema = z.object({
   email: z.string().trim().toLowerCase().email().max(254),
@@ -14,45 +15,12 @@ const schema = z.object({
 // Run next to the Supabase database (Central EU, Frankfurt): a central point for a worldwide audience.
 export const preferredRegion = "fra1";
 
-// 5 sign-ups an hour from one address (docs/LAUNCH.md): counted in Upstash Redis when it's set up
-// (shared by every server instance), else here, per instance.
-const LIMIT = 5;
-const WINDOW_MS = 60 * 60 * 1000;
-const hits = new Map<string, number[]>();
-
-function limitedHere(ip: string) {
-  const now = Date.now();
-  const recent = (hits.get(ip) ?? []).filter((t) => now - t < WINDOW_MS);
-  recent.push(now);
-  hits.set(ip, recent);
-  return recent.length > LIMIT;
-}
-
-async function limited(ip: string): Promise<boolean> {
-  const url = process.env.UPSTASH_REDIS_REST_URL;
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN;
-  if (!url || !token) return limitedHere(ip);
-  const key = `waitlist:ip:${ip}:${Math.floor(Date.now() / WINDOW_MS)}`;
-  try {
-    const response = await fetch(`${url.replace(/\/$/, "")}/pipeline`, {
-      method: "POST",
-      headers: { Authorization: `Bearer ${token}`, "Content-Type": "application/json" },
-      body: JSON.stringify([["INCR", key], ["EXPIRE", key, String(WINDOW_MS / 1000)]]),
-      cache: "no-store",
-    });
-    const [incr] = (await response.json()) as [{ result?: number }];
-    return typeof incr?.result === "number" ? incr.result > LIMIT : limitedHere(ip);
-  } catch {
-    return limitedHere(ip);
-  }
-}
-
 const ok = () => NextResponse.json({ ok: true }, { status: 201 });
 const fail = (error: string, status: number) => NextResponse.json({ ok: false, error }, { status });
 
 export async function POST(req: Request) {
-  const ip = req.headers.get("x-forwarded-for")?.split(",")[0].trim() || "local";
-  if (await limited(ip)) return fail("Too many tries. Give it a few minutes.", 429);
+  // 5 an hour from one address, shared with "Email me the link" (lib/limits.ts).
+  if (await formLimitByIp(clientIp(req))) return fail("Too many tries. Give it a few minutes.", 429);
 
   const parsed = schema.safeParse(await req.json().catch(() => null));
   if (!parsed.success) return fail("That email doesn't look right.", 400);

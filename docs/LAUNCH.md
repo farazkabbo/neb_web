@@ -7,12 +7,16 @@ contract is [DESKTOP_API.md](DESKTOP_API.md) (the same file in both repos).
 ## What this repo does
 
 - **`LAUNCH_MODE`** (`waitlist` by default, `open` on launch day; read per request, no rebuild).
-  Open turns every "join the waitlist" into **Get neb**, a link to the app's Clerk sign-up that
-  comes back to `/download`. The waitlist forms stay in the page, hidden, because
-  `public/neb-home.js` looks them up by id.
-- **`/download`**: the Windows installer named by `public/desktop/latest.json` (the same file the
-  app updates from), only if it's https on this site. Before a release is uploaded, it says the
-  installer is on its way.
+  Open turns every "join the waitlist" into **Get neb**, a link to the public `/download` page:
+  no account needed (people sign up the first time they open the app). The waitlist forms stay
+  in the page, hidden, because `public/neb-home.js` looks them up by id.
+- **`/download`**: Windows gets the installer named by `public/desktop/latest.json` (https on
+  this site only); Mac and Linux get "neb is Windows-only for now. Mac is coming soon." Both have
+  "Email me the link" and "Already have an account? Sign in".
+- **`/api/download-link`**: "Email me the link". Keeps the address on the waitlist (source
+  `download` or `download_mac`, an earlier signup unchanged), always sends the download-link
+  email (Resend, 8 s timeout, one retry), 5 an hour per address (shared with the waitlist form)
+  and 3 a day per email.
 - **`/api/clerk-webhook`**: Clerk's `user.created` marks a waitlist email `converted`.
 - **`/api/waitlist`**: 5 sign-ups an hour per address, counted in Upstash when it's set (shared by
   every instance), else per instance.

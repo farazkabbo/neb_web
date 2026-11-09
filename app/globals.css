@@ -248,3 +248,10 @@ footer a{color:inherit}
 .legal-meta{font:400 13px var(--f-body);color:var(--muted)}
 .legal-back{font:500 13px var(--f-body);text-decoration:none}
 
+
+/* /download's "Email me the link" (docs/LAUNCH.md). */
+.dl-email{margin:28px 0 8px;max-width:520px}
+.dl-email label{display:block;font:500 14px var(--f-body);margin-bottom:6px}
+.dl-email .row{display:flex;gap:8px}
+.dl-email input[type="email"]{flex:1;min-width:0;padding:8px 10px;font:400 15px var(--f-body);border:1px solid var(--muted);border-radius:6px;background:#fff}
+.dl-email .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}

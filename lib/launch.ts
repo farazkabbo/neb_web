@@ -1,7 +1,8 @@
 /**
  * Launch day (docs/LAUNCH.md): `LAUNCH_MODE=waitlist` (the default) is today's page, unchanged.
- * `LAUNCH_MODE=open` turns every way to join the waitlist into "Get neb", which signs the visitor
- * up on the app (Clerk) and comes back to /download. Flipping it is the only change on the day.
+ * `LAUNCH_MODE=open` turns every way to join the waitlist into "Get neb": the public /download
+ * page, with no account needed (people sign up the first time they open the app). Flipping it is
+ * the only change on the day.
  */
 
 export type LaunchMode = "waitlist" | "open";
@@ -10,11 +11,10 @@ export function launchMode(): LaunchMode {
   return process.env.LAUNCH_MODE === "open" ? "open" : "waitlist";
 }
 
-/** Where "Get neb" goes: the app's sign-up, then back here to download the installer. */
+/** Where "Get neb" goes: the public download page (no account needed; sign-up is in the app). */
 export function getNebUrl(): string {
-  const app = (process.env.NEXT_PUBLIC_APP_URL || "https://app.myneb.si").replace(/\/$/, "");
   const site = (process.env.NEXT_PUBLIC_SITE_URL || "https://myneb.si").replace(/\/$/, "");
-  return `${app}/sign-up?redirect_url=${encodeURIComponent(`${site}/download`)}`;
+  return `${site}/download`;
 }
 
 const escape = (text: string) =>
@@ -23,7 +23,7 @@ const escape = (text: string) =>
 /**
  * The home page for open mode. The waitlist forms stay in the page, hidden (the page's script
  * looks them up by id), with "Get neb" beside them; every "join the waitlist" button becomes a
- * link to sign up. Waitlist mode returns the page as it is.
+ * link to /download. Waitlist mode returns the page as it is.
  */
 export function homeFor(mode: LaunchMode, html: string, url = getNebUrl()): string {
   if (mode === "waitlist") return html;
