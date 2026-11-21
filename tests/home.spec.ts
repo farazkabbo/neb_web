@@ -49,12 +49,11 @@ test("hero and final forms send their own source", async ({ page }) => {
   expect(sources).toEqual(["hero", "final_cta"]);
 });
 
-test("only circle_and_ask is available now", async ({ page }) => {
+test("all four features say available now", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator(".badge")).toHaveCount(4);
-  await expect(page.locator(".badge.now")).toHaveCount(1);
-  await expect(page.locator("#ft-circle .badge")).toHaveText("available now");
-  for (const id of ["#ft-show", "#ft-catch", "#ft-do"]) await expect(page.locator(`${id} .badge`)).toHaveText("in development");
+  await expect(page.locator(".badge.now")).toHaveCount(4);
+  for (const id of ["#ft-circle", "#ft-show", "#ft-catch", "#ft-do"]) await expect(page.locator(`${id} .badge`)).toHaveText("available now");
 });
 
 test("reduced motion: scenes never start and loops stay paused", async ({ browser }) => {

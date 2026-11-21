@@ -40,7 +40,35 @@ button,input{font:inherit;color:inherit}
 .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
 
 /* ---------- desk ---------- */
-#neb-root{background:radial-gradient(120% 60% at 70% 0%,var(--night2),var(--night) 60%) var(--night);color:var(--ivory);min-height:100vh;overflow-x:clip}
+/* the wallpaper: a starry night at the top that turns into the dawn sky at the bottom */
+#neb-root{position:relative;isolation:isolate;color:var(--ivory);min-height:100vh;overflow-x:clip;
+  background:
+    radial-gradient(60% 900px at 72% 120px,#6B4EE640,transparent 70%),
+    radial-gradient(45% 700px at 8% 520px,#7DA4AF2E,transparent 70%),
+    linear-gradient(180deg,#0B1520 0,var(--night) 900px,#12263A 1800px,#1C3B52 100%)}
+#neb-root::before{content:"";position:absolute;inset:0 0 auto;height:2400px;z-index:-1;pointer-events:none;opacity:.9;
+  background:
+    radial-gradient(1.4px 1.4px at 23px 41px,#fff,transparent),
+    radial-gradient(1px 1px at 137px 89px,#fffc,transparent),
+    radial-gradient(1.2px 1.2px at 211px 163px,#F1E5AEcc,transparent),
+    radial-gradient(1px 1px at 61px 207px,#fff9,transparent),
+    radial-gradient(1.6px 1.6px at 289px 37px,#C4D4D2,transparent),
+    radial-gradient(1px 1px at 173px 271px,#fff8,transparent);
+  background-size:310px 300px;
+  -webkit-mask-image:linear-gradient(#000 0,#000 45%,transparent);mask-image:linear-gradient(#000 0,#000 45%,transparent)}
+#neb-root::after{content:"";position:absolute;inset:auto 0 0;height:1700px;z-index:-1;pointer-events:none;
+  background:linear-gradient(180deg,#1C3B5299 0,transparent 55%),url(/media/wallpaper.webp) center bottom/cover no-repeat;
+  -webkit-mask-image:linear-gradient(transparent 0,#000 45%);mask-image:linear-gradient(transparent 0,#000 45%)}
+#neb-root main,#neb-root footer{position:relative}
+
+/* desktop icons in the left margin (wide screens only) */
+.icons{display:none}
+@media (min-width:1420px){
+  .icons{display:flex;flex-direction:column;gap:22px;position:absolute;left:22px;top:64px;z-index:1}
+  .icon{width:92px;display:flex;flex-direction:column;align-items:center;gap:6px;font:500 12px/1.25 var(--f-ui);color:#fff;text-decoration:none;text-align:center;text-shadow:0 1px 2px #000;padding:4px}
+  .icon img{width:44px;height:44px;image-rendering:pixelated;filter:drop-shadow(0 2px 0 #0006)}
+  .icon:hover{background:#6B4EE640;outline:1px dotted #fff8}
+}
 #neb-root main{max-width:1180px;margin:0 auto;padding:56px 28px 24px;display:flex;flex-direction:column;gap:88px}
 .kick{font:500 15px var(--f-ui);letter-spacing:.08em;text-transform:uppercase;color:var(--sky3);margin:0 0 20px}
 
@@ -153,9 +181,9 @@ button,input{font:inherit;color:inherit}
 .lightbox .btn{margin:6px}
 body.lb-open{overflow:hidden}
 
-footer{padding-block:48px 64px;text-align:center;color:var(--sky3);font:500 13px var(--f-ui)}
-footer .mk{width:40px;height:30px;color:#9D88F0}
-footer .see{font:400 30px var(--f-disp);color:var(--ivory);margin:10px 0 18px}
+footer{padding-block:48px 64px;text-align:center;color:#3C3A35;font:500 13px var(--f-ui)}
+footer .mk{width:40px;height:30px;color:var(--violet)}
+footer .see{font:400 30px var(--f-disp);color:var(--ink);margin:10px 0 18px}
 footer nav{display:flex;gap:18px;justify-content:center;margin-bottom:12px}
 footer a{color:inherit}
 

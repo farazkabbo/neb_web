@@ -57,22 +57,28 @@ const FEATURES = String.raw`
   </section>
   <section class="win feat" id="ft-show" data-feature="show_me" aria-labelledby="ft-show-h">${tb("show_me.exe", "sand")}
     <div class="mini m-show" aria-hidden="true"><div class="tools"><i></i><i></i><i class="lit"></i><i></i></div><span class="step">step 2 of 3 · flip to back</span><div class="shirt"><span>logo</span></div>${cursor("c2")}</div>
-    <div class="pad"><span class="badge dev">in development</span><h3 id="ft-show-h">show me</h3>
+    <div class="pad"><span class="badge now">available now</span><h3 id="ft-show-h">show me</h3>
       <p>stuck in an app? ask how. neb lights up the way, step by step — like flipping a shirt to the back and putting your logo on it — and you click. each time, it helps a little less, until you don't need it.</p></div>
   </section>
   <section class="win feat" id="ft-catch" data-feature="catch_me" aria-labelledby="ft-catch-h">${tb("catch_me.sys", "ink")}
     <div class="mini m-catch" aria-hidden="true"><code>DROP TABLE customers;</code><span class="run">▶ run on prod</span><span class="stop">wait. this is the live database.</span>${cursor("c3")}</div>
-    <div class="pad"><span class="badge dev">in development</span><h3 id="ft-catch-h">catch me</h3>
+    <div class="pad"><span class="badge now">available now</span><h3 id="ft-catch-h">catch me</h3>
       <p>about to run DROP TABLE on the live database, send an email that says 'attached' with nothing attached, or reply-all to 43 people? neb sees where your mouse is heading and stops you first. runs on your computer.</p></div>
   </section>
   <section class="win feat" id="ft-do" data-feature="do_it" aria-labelledby="ft-do-h">${tb("do_it.exe", "teal")}
     <div class="mini m-do" aria-hidden="true"><ul><li><s>IMG_0412.jpg</s> beach_01.jpg</li><li><s>IMG_0413.jpg</s> beach_02.jpg</li><li><s>IMG_0414.jpg</s> beach_03.jpg</li></ul><span class="replay">◀◀ replay · 2s</span></div>
-    <div class="pad"><span class="badge dev">in development</span><h3 id="ft-do-h">do it</h3>
+    <div class="pad"><span class="badge now">available now</span><h3 id="ft-do-h">do it</h3>
       <p>the busywork you don't need to learn: save a recipe to your recipe book, find your lease pdf, rename 40 photos. neb does it, then shows a 2-second replay of what it did, so you're never in the dark.</p></div>
   </section>
 </section>`;
 
 export const HOME_HTML = String.raw`${SPRITES}
+<nav class="icons" aria-label="desktop">
+  <a class="icon" href="#feat-h"><img src="/media/icon-notebook.png" alt="" width="44" height="44">features</a>
+  <a class="icon" href="#letter-h"><img src="/media/icon-letter.png" alt="" width="44" height="44">letter.txt</a>
+  <a class="icon" href="#faq-h"><img src="/media/icon-help.png" alt="" width="44" height="44">readme.txt</a>
+  <a class="icon" href="#join"><img src="/media/icon-lock.png" alt="" width="44" height="44">join.exe</a>
+</nav>
 <main>
 <section class="desk hero-desk" aria-labelledby="hero-h">
   <section class="win hero-win" aria-labelledby="hero-h">${tb("neb.exe")}
@@ -108,7 +114,7 @@ ${FEATURES}
     <div class="pad faq"><h2 class="sr" id="faq-h">questions</h2>
       <details open><summary>what is neb?</summary><p>a cursor that understands anything you circle on your screen. it explains, shows you how, catches mistakes and does the chores.</p></details>
       <details><summary>will it just do things for me?</summary><p>the busywork, yes, and it shows you a replay of what it did. anything worth learning, it shows you the way and you do it.</p></details>
-      <details><summary>what works today vs what's coming?</summary><p>circle and ask, the notebook and the handwriting check work today. show me, catch me and do it are in development.</p></details>
+      <details><summary>what works today?</summary><p>all of it: circle and ask, show me, catch me and do it, plus the notebook and the handwriting check.</p></details>
       <details><summary>when can i get it?</summary><p>soon. the waitlist gets in first, and we'll email you once when it's ready.</p></details>
       <details><summary>which computers?</summary><p>windows first. mac is coming soon.</p></details>
       <details><summary>which languages?</summary><p>we've tested bengali, french and english.</p></details>
