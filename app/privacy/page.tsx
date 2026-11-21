@@ -27,7 +27,7 @@ export default function Privacy() {
       <h2>2. What we collect</h2>
       <h3>Information you give us</h3>
       <ul>
-        <li><b>Email address</b>: when you join the waitlist (from the main form, the setup form, or &ldquo;send this to your laptop&rdquo;).</li>
+        <li><b>Email address</b>: when you join the waitlist (from the main form, the setup form, or &ldquo;send this to your laptop&rdquo;), or when you ask for neb Pro early access.</li>
         <li><b>Role</b> (optional): e.g. student, teacher or parent, if a form asks and you choose to answer.</li>
         <li><b>Your messages</b>: if you email or reply to us, we receive what you send.</li>
       </ul>
@@ -36,6 +36,7 @@ export default function Privacy() {
         <li><b>Signup details</b>: which form you used, any campaign tag in the link you followed (such as <code>utm_source</code>), and the date and time you joined.</li>
         <li><b>IP address, briefly</b>: we hold it in server memory for up to 10 minutes to stop spam and repeated signups. We do not store it in our database.</li>
         <li><b>Hosting logs</b>: our hosting provider automatically records standard request data (such as IP address, browser type, page requested and time) to run and secure the service.</li>
+        <li><b>Pro button presses</b>: if you press &ldquo;upgrade to pro&rdquo;, we count the press (date, time and launch phase only, nothing that identifies you) to learn how many people want Pro. Nothing is charged.</li>
         <li><b>Device storage</b>: the site saves one small flag in your browser&apos;s session storage so the intro animation plays only once per visit. It never leaves your device and is cleared when you close the tab.</li>
       </ul>
       <p>

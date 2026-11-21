@@ -161,4 +161,21 @@ bplay.addEventListener('click',()=>{
   v.addEventListener('ended',()=>{v.remove();$('#ldlg').hidden=false});
   $('#ldlg').hidden=true;if(loopv)loopv.pause();scr.appendChild(v);v.play().catch(()=>{});
 });
+
+/* ----- pro fake door (docs/PRO_TEST.md): counts the click, never charges ----- */
+const pro=(body)=>fetch('/api/pro',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(body),keepalive:true});
+const bpro=$('#b-pro');
+if(bpro)bpro.addEventListener('click',()=>{
+  pro({action:'click'}).catch(()=>{});
+  $('#pro-b').innerHTML=`<h2 id="pro-h">pro is launching next month.</h2><p>add your email and you're in early access, at no charge. nothing to pay today.</p><form class="wl" id="f-pro" novalidate><label class="sr" for="e-pro">email</label><input id="e-pro" type="email" placeholder="you@email.com" autocomplete="email" required><input name="company" tabindex="-1" autocomplete="off" aria-hidden="true" class="hp"><button class="btn go" id="b-pro2">get early access</button></form><p class="micro" id="m-pro" role="status"></p>`;
+  $('#e-pro').focus();
+});
+document.addEventListener('submit',async e=>{if(e.target.id!=='f-pro')return;e.preventDefault();
+  const i=$('#e-pro'),m=$('#m-pro'),b=$('#b-pro2'),email=i.value.trim();
+  if(!ok(email)){m.textContent='that email looks off. check it and try again.';i.focus();return}
+  b.disabled=true;b.textContent='adding…';
+  const r=await pro({action:'join',email,company:e.target.company.value}).catch(()=>null);
+  if(!r||!r.ok){b.disabled=false;b.textContent='get early access';const j=r?await r.json().catch(()=>({})):{};m.textContent=(j.error||"couldn't save that. try again.").toLowerCase();return}
+  $('#pro-b').innerHTML='<h2 id="pro-h">you’re in.</h2><p class="done" role="status">✓ pro is launching next month. you’ve been added to early access at no charge today.</p>';
+});
 })();

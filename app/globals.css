@@ -216,6 +216,14 @@ h2.big{font:400 clamp(40px,6vw,76px)/1 var(--f-disp);margin:0 0 36px;text-align:
 .faq summary::before{content:"+";width:14px;color:var(--violet)}
 .faq details[open] summary::before{content:"−"}
 .faq details p{margin:8px 0 0 22px;color:#3C3A35}
+.pro{max-width:520px;margin:56px auto 0}
+.pro .win{position:relative}
+.pro h2{font:400 34px var(--f-disp);margin:0 0 4px}
+.pro .price{font:500 15px var(--f-ui);color:var(--muted)}
+.pro .price b{font-size:28px;color:var(--ink)}
+.pro .wl{margin-top:10px}
+.pro .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+.pro .btn:focus-visible,.pro input:focus-visible{outline:2px solid var(--violet);outline-offset:2px}
 footer{padding-block:48px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));text-align:center;color:var(--muted);font:500 13px var(--f-ui)}
 footer .mk{width:40px;height:30px;color:var(--violet)}
 footer .see{font:400 30px var(--f-disp);color:var(--ink);margin:10px 0 18px}
