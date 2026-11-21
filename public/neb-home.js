@@ -124,7 +124,7 @@ function startFilm(at){
   if(!film)return;
   if(!started){
     started=true;if(loop){loop.pause();loop.hidden=true}
-    film.hidden=false;$('#b-film').hidden=true;$('#skin').hidden=false;film.muted=false;setCC(true);
+    film.hidden=false;$('#b-film').hidden=true;$('#muted-tag').hidden=true;$('#skin').hidden=false;film.muted=false;setCC(true);
   }
   const go=()=>{try{film.currentTime=at||0}catch(e){}};
   film.readyState>=1?go():film.addEventListener('loadedmetadata',go,{once:true});
@@ -160,7 +160,7 @@ if(film){
     $$('.feat[data-chapter]').forEach(w=>w.classList.toggle('glow',on&&w.dataset.chapter===cur.id));
   }
   film.addEventListener('timeupdate',sync);
-  film.addEventListener('ended',()=>{sync();$('#b-film').hidden=false;$('#b-film').lastChild.textContent=' watch again · 59s';started=false;film.hidden=true;if(loop){loop.hidden=false}});
+  film.addEventListener('ended',()=>{sync();$('#b-film').hidden=false;$('#muted-tag').hidden=false;$('#b-film').childNodes[1].textContent=' watch again · 59s ';started=false;film.hidden=true;if(loop){loop.hidden=false}});
   trk.addEventListener('click',e=>{if(e.target.closest('.mark'))return;const r=trk.getBoundingClientRect();film.currentTime=(film.duration||59)*Math.min(1,Math.max(0,(e.clientX-r.left)/r.width))});
   trk.addEventListener('keydown',e=>{const k={ArrowRight:5,ArrowLeft:-5}[e.key];if(k){e.preventDefault();film.currentTime=Math.max(0,film.currentTime+k)}if(e.key==='Home'){e.preventDefault();film.currentTime=0}});
   CH.forEach(c=>c.el.addEventListener('click',()=>startFilm(c.at)));

@@ -76,7 +76,8 @@ export const filmWindow = (captions: boolean) => String.raw`<section class="win 
       <source src="/media/neb-ad-1080.mp4" type="video/mp4">
       ${captions ? `<track kind="captions" src="/media/neb-ad.en.vtt" srclang="en" label="english" default>` : ""}
     </video>
-    <button class="bigplay" type="button" id="b-film"><span class="tri" aria-hidden="true">▶</span> watch the film · 59s</button>
+    <span class="muted-tag" id="muted-tag" aria-hidden="true">🔇 silent preview · press play for sound</span>
+    <button class="bigplay" type="button" id="b-film"><span class="tri" aria-hidden="true">▶</span> watch the film · 59s <small>with sound</small></button>
   </div>
   <div class="skin" id="skin" hidden>
     <button type="button" class="sk" id="sk-play" aria-label="play">▶</button>
