@@ -138,7 +138,7 @@ body:has(#neb-root){background:var(--night)}
 .formula{font:400 clamp(30px,3.6vw,46px)/1.2 var(--f-disp);margin:0 0 70px;display:inline-block}
 .page .t{border-radius:4px;cursor:pointer}
 .page .t:hover{background:#6B4EE614}
-.page .t[data-t="r"],.page .t[data-t="t"]{display:inline-block;min-width:26px;text-align:center}
+.page .t[data-t="r"],.page .t[data-t="t"]{display:inline-block;min-width:24px;margin:0 -4px;text-align:center}
 .ex{font:500 16px var(--f-mono);margin:0;display:inline-block}
 canvas.ink,svg.ann{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 svg.ann g{animation:pop .35s both}
@@ -225,7 +225,7 @@ svg.ring.on ellipse{opacity:1;animation:dash .5s forwards}
 .files .new{color:#3F2BA0;font-weight:700}
 .files li.renamed .old{text-decoration:line-through;color:var(--muted);font-size:14px}
 .files li.renamed .new{animation:pop .3s both}
-.recipe{position:absolute;left:22px;bottom:72px;width:46%;background:#fff;border:1px solid var(--ink);padding:10px 12px;font-size:15px;line-height:1.4;box-shadow:3px 3px 0 #0002;transition:translate .65s cubic-bezier(.5,0,.3,1),scale .65s,opacity .65s,rotate .65s}
+.recipe{position:absolute;left:22px;right:186px;bottom:72px;background:#fff;border:1px solid var(--ink);padding:10px 12px;font-size:15px;line-height:1.4;box-shadow:3px 3px 0 #0002;transition:translate .65s cubic-bezier(.5,0,.3,1),scale .65s,opacity .65s,rotate .65s}
 .recipe.fly{translate:var(--fx) var(--fy);scale:.15;rotate:-14deg;opacity:0}
 .folder{position:absolute;right:22px;bottom:80px;font:500 15px var(--f-ui);background:var(--note);border:1px solid var(--ink);padding:10px 12px}
 .folder.bump{animation:bump .35s}

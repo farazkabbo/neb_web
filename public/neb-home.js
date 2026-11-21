@@ -78,7 +78,7 @@ document.addEventListener('pointerdown',e=>{
 
 /* open animation for windows below the first screen */
 if(!RM&&'IntersectionObserver'in window){
-  const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.remove('pre');en.target.classList.add('in');io.unobserve(en.target)}}),{threshold:.1});
+  const io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.remove('pre');en.target.classList.add('in');io.unobserve(en.target)}}),{threshold:0,rootMargin:'0px 0px -8% 0px'});
   wins.forEach(w=>{if(w.getBoundingClientRect().top>innerHeight){w.classList.add('pre');io.observe(w)}});
 }
 
