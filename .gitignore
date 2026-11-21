@@ -8,3 +8,5 @@ assets-in/higgsfield/
 
 # source video for the site (encoded copies go to public/media)
 media-src/
+test-results/
+playwright-report/

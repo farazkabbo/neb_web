@@ -46,10 +46,10 @@
   paused with posters; exactly one "available now" badge (circle_and_ask); no horizontal scroll at 390
 - screenshots 1440 + 390 → docs/screens/; Lighthouse mobile via `npx lighthouse` on next start
 
-## questions before I build
-1. analytics: there is none. /privacy says "we do not use … analytics tools". film_play / cta_click
-   events need a tool (e.g. Vercel Web Analytics, cookieless) and a privacy page update. skip them,
-   or add one and update /privacy?
-2. media-src/neb-ad-final.mp4 and docs/vo-script.txt aren't here yet. I can build everything
-   with placeholder posters and run the encode when they land
-3. ok to delete the 29 MB of old media from public/media (they stay in git history)?
+## decisions (2026-11-20)
+- no installer yet: the home page is waitlist only (hero + final_cta forms), LAUNCH_MODE no
+  longer changes it, nothing links to /download. mac visitors see the same form + "mac coming soon"
+- no analytics tool (/privacy stays true); the only counter is the Pro test (docs/PRO_TEST.md)
+- until the ad is encoded, neb_preview.exe (a drawn demo) stands in for neb_film.mp4; page.tsx
+  swaps it in at build time when public/media/hero-loop.mp4 exists
+- old public/media videos are left in place, unreferenced, until you say delete
