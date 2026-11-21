@@ -23,7 +23,7 @@
 ## demos (scripted, no network; each module import()ed when its window is 20% visible)
 - circle_and_ask: PV = FV / (1 + rt) page. Alt+drag (touch: "✎ circle" toggle) draws a live
   gradient stroke on canvas (#7C5CF0→#F06BA8→#4E95F5). release: loop bbox hit-tests tagged targets
-  (FV, PV, r, t, 1 + rt); neb cursor glides in; SVG labels + arrows draw; no hit → "in the real app,
+  (FV, PV, rt, 1 + rt); neb cursor glides in; SVG labels + arrows draw; no hit → "in the real app,
   neb explains anything you circle." বাংলা / français / english switches the question bubble only
 - show_me: toolbar, Front/Back, violet tee SVG, uploads tray with the neb logo. steps: back →
   uploads → place logo. last ~80ms of pointer velocity → ray → nearest tool; wrong tool ⇒ right one

@@ -107,7 +107,7 @@ const PLAYGROUND = String.raw`
     <div class="stage" data-demo="circle">
       <div class="page">
         <p class="dh">finance · present value</p>
-        <p class="formula t" data-t="formula"><span class="t" data-t="pv" tabindex="0" role="button" aria-label="circle PV">PV</span> = <span class="t" data-t="fv" tabindex="0" role="button" aria-label="circle FV">FV</span> / <span class="t" data-t="den" tabindex="0" role="button" aria-label="circle 1 plus r t">(1 + <span class="t" data-t="r" tabindex="0" role="button" aria-label="circle r">r</span><span class="t" data-t="t" tabindex="0" role="button" aria-label="circle t">t</span>)</span></p>
+        <p class="formula t" data-t="formula"><span class="t" data-t="pv" tabindex="0" role="button" aria-label="circle PV">PV</span> = <span class="t" data-t="fv" tabindex="0" role="button" aria-label="circle FV">FV</span> / <span class="t" data-t="den" tabindex="0" role="button" aria-label="circle 1 plus r t">(1 + <span class="t" data-t="rt" tabindex="0" role="button" aria-label="circle rt">rt</span>)</span></p>
         <p class="ex t" data-t="ex" tabindex="0" role="button" aria-label="FV = $1,100 · r = 5% · t = 2 years (circle it)">FV = $1,100 · r = 5% · t = 2 years</p>
         <canvas class="ink" aria-hidden="true"></canvas>
         <svg class="ann" aria-hidden="true"></svg>

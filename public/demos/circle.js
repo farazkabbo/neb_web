@@ -5,8 +5,7 @@ const ANSWERS = {
   fv: { text: "FV is the future value: what the money is worth later. here, $1,100 after 2 years.", labels: [["fv", "future value"]] },
   pv: { text: "PV is the present value: what it's worth today. work back from FV and you get $1,000.", labels: [["pv", "present value"]] },
   den: { text: "1 + rt is the growth: 1 plus the interest added. 1 + 0.05 × 2 = 1.10.", labels: [["den", "interest added"]] },
-  r: { text: "r is the yearly interest rate: 5% is 0.05.", labels: [["r", "rate per year"]] },
-  t: { text: "t is the time, in years: 2 here.", labels: [["t", "years"]] },
+  rt: { text: "rt is the rate times the time: 5% a year for 2 years is 0.05 × 2 = 0.10.", labels: [["rt", "rate × time"]] },
   formula: {
     text: "divide what the money will be worth by the interest it gains, and you get what it's worth today.",
     labels: [["pv", "present value"], ["den", "interest added"]],
