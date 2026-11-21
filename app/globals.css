@@ -140,7 +140,7 @@ body:has(#neb-root){background:var(--night)}
 .formula{font:400 clamp(30px,3.6vw,46px)/1.2 var(--f-disp);margin:0 0 70px;display:inline-block}
 .page .t{border-radius:4px;cursor:pointer}
 .page .t:hover{background:#6B4EE614}
-.page .t[data-t="rt"]{display:inline-block;min-width:32px;text-align:center}
+.page .t[data-t="rt"]{display:inline-block;min-width:24px;text-align:center}
 .ex{font:500 16px var(--f-mono);margin:0;display:inline-block}
 canvas.ink,svg.ann{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 svg.ann g{animation:pop .35s both}
@@ -153,6 +153,15 @@ svg.ann text{font:600 14px var(--f-ui);fill:#3F2BA0}
 .page .a{position:absolute;left:12px;right:12px;bottom:10px;margin:0;background:var(--violet);color:#fff;padding:10px 12px;font-size:16px;line-height:1.45;border:1px solid var(--ink);animation:pop .3s both}
 .page .a .chip{display:inline-block;margin-top:4px;font:600 13px var(--f-ui);background:#fff;color:#3F2BA0;padding:1px 7px}
 .tip{font-size:14px;color:var(--muted)}
+/* "try it now": beside the formula, pointing at it (under it on phones) */
+.try{position:absolute;left:calc(24px + 300px);top:58px;display:flex;align-items:flex-end;gap:4px;pointer-events:none;color:#3F2BA0}
+.try svg{width:76px;height:44px;margin-bottom:6px}
+@media (max-width:1180px) and (min-width:901px),(max-width:640px){.try{left:22%;top:58%}.try svg{rotate:40deg;margin-bottom:22px}}
+.try span{font:600 20px var(--f-ui);display:flex;flex-direction:column;line-height:1.15}
+.try small{font:500 14px var(--f-body);color:var(--muted)}
+.stage:not(.used) .try{animation:nudge 1.8s ease-in-out infinite}
+@keyframes nudge{50%{translate:-4px -5px}}
+.used .try,.page:has(.a:not([hidden])) .try{display:none}
 kbd{font:600 13px var(--f-ui);background:#fff;border:1px solid var(--chrome-dk);border-bottom-width:2px;padding:0 5px}
 .langs{margin-left:auto;display:flex;gap:4px}
 .langs button{font:500 14px var(--f-body);padding:3px 8px;background:#fff;border:1px solid var(--chrome-dk);cursor:pointer}
@@ -229,8 +238,12 @@ svg.ring.on ellipse{opacity:1;animation:dash .5s forwards}
 .files li.renamed .new{animation:pop .3s both}
 .recipe{position:absolute;left:22px;right:186px;bottom:72px;background:#fff;border:1px solid var(--ink);padding:10px 12px;font-size:15px;line-height:1.4;box-shadow:3px 3px 0 #0002;transition:translate .65s cubic-bezier(.5,0,.3,1),scale .65s,opacity .65s,rotate .65s}
 .recipe.fly{translate:var(--fx) var(--fy);scale:.15;rotate:-14deg;opacity:0}
-.folder{position:absolute;right:22px;bottom:80px;font:500 15px var(--f-ui);background:var(--note);border:1px solid var(--ink);padding:10px 12px}
+.folder{position:absolute;right:22px;bottom:66px;width:140px;display:flex;flex-direction:column;align-items:center;gap:2px;font:500 14px var(--f-ui);color:var(--ink)}
+.folder .book{width:112px;height:auto;filter:drop-shadow(3px 4px 0 #0002)}
+.folder span{background:#fff;border:1px solid var(--ink);padding:1px 8px}
 .folder.bump{animation:bump .35s}
+.folder.bump .book{animation:wiggle .45s}
+@keyframes wiggle{30%{rotate:-6deg}70%{rotate:4deg}}
 @keyframes bump{50%{scale:1.12}}
 svg.trail{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;opacity:0;transition:opacity .3s;z-index:4}
 svg.trail.on{opacity:1}

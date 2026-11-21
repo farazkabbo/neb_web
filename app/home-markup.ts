@@ -23,7 +23,7 @@ export const CHAPTERS = [
 const FILM_SECONDS = 59;
 
 const SPRITES = String.raw`<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs><linearGradient id="g-neb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7C5CF0"/><stop offset=".55" stop-color="#F06BA8"/><stop offset="1" stop-color="#4E95F5"/></linearGradient></defs>
+  <defs><linearGradient id="g-book" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E07A4F"/><stop offset="1" stop-color="#B4442A"/></linearGradient><linearGradient id="g-neb" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7C5CF0"/><stop offset=".55" stop-color="#F06BA8"/><stop offset="1" stop-color="#4E95F5"/></linearGradient></defs>
   <symbol id="mk" viewBox="12 34 190 146"><path d="M36 150 V104 C36 74 56 58 80 58 C104 58 122 74 122 104 V136 L142 156 L178 106" fill="none" stroke="currentColor" stroke-width="30" stroke-linecap="round" stroke-linejoin="round"/></symbol>
   <symbol id="wm" viewBox="0 0 256 96"><g fill="none" stroke="currentColor" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"><path d="M10 86 V58 C10 40 22 30 38 30 C54 30 66 40 66 58 V86"/><path d="M101 58 H155 A27 27 0 1 0 147 77"/><path d="M190 8 V86"/><path d="M218 30 A28 28 0 1 1 217.99 30"/></g></symbol>
 </svg>`;
@@ -114,6 +114,7 @@ const PLAYGROUND = String.raw`
         <svg class="ann" aria-hidden="true"></svg>
         <p class="q" hidden><span aria-hidden="true">🎙</span> <span class="qt">what does this mean?</span></p>
         <p class="a" hidden></p>
+        <div class="try" aria-hidden="true"><svg viewBox="0 0 120 70"><path d="M114 58 C 90 60, 50 54, 14 26" fill="none" stroke="url(#g-neb)" stroke-width="3.5" stroke-linecap="round"/><path d="M12 42 L12 24 L30 22" fill="none" stroke="url(#g-neb)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg><span>try it now<small>circle any part of the formula</small></span></div>
         ${nebCursor()}
       </div>
       <div class="bar">
@@ -193,7 +194,20 @@ const PLAYGROUND = String.raw`
         <li data-new="2026-06-15_market.jpg"><span class="old">IMG_0414.jpg</span><span class="new"></span></li>
       </ul>
       <div class="recipe" aria-hidden="true">🍝 <b>nonna's pasta</b><br>rigatoni · tomatoes · basil</div>
-      <div class="folder" aria-hidden="true">📒 <span>recipe book (<b class="count">3</b>)</span></div>
+      <div class="folder" aria-hidden="true">
+        <svg class="book" viewBox="0 0 120 110">
+          <path d="M14 18 Q14 10 22 10 H104 Q110 10 110 16 V94 Q110 100 104 100 H22 Q14 100 14 92 Z" fill="#7A2E1D"/>
+          <rect x="20" y="14" width="86" height="84" rx="3" fill="#FFF8EC"/>
+          <path d="M24 12 Q24 6 30 6 H100 Q106 6 106 12 V90 Q106 96 100 96 H30 Q24 96 24 90 Z" fill="url(#g-book)" stroke="#5E2214" stroke-width="2"/>
+          <rect x="24" y="6" width="9" height="90" fill="#5E2214" opacity=".35"/>
+          <rect x="44" y="28" width="50" height="30" rx="4" fill="#FFF8EC" stroke="#5E2214" stroke-width="1.5"/>
+          <text x="69" y="41" text-anchor="middle" font-size="10" font-weight="700" fill="#5E2214" font-family="Georgia,serif">recipes</text>
+          <path d="M57 49 q5 -6 12 0 q7 -6 12 0" fill="none" stroke="#C8553D" stroke-width="2" stroke-linecap="round"/>
+          <path d="M88 6 V30 L93 25 L98 30 V6" fill="#F06BA8"/>
+          <circle cx="69" cy="76" r="8" fill="#F1E5AE" stroke="#5E2214" stroke-width="1.5"/><path d="M65 76 h8 M69 72 v8" stroke="#5E2214" stroke-width="1.6" stroke-linecap="round"/>
+        </svg>
+        <span>recipe book · <b class="count">3</b></span>
+      </div>
       <svg class="trail" aria-hidden="true"><polyline/></svg>
       ${nebCursor()}
       <div class="bar">

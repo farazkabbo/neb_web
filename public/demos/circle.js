@@ -133,6 +133,7 @@ export function init(stage, api) {
   page.addEventListener("pointerdown", (e) => {
     if (!armed(e) || e.button > 0) return;
     e.preventDefault();
+    stage.classList.add("used"); // the "try it now" arrow has done its job
     clear(); drawing = true; pts = [at(e)];
     page.setPointerCapture(e.pointerId);
   });
