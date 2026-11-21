@@ -11,6 +11,11 @@ export function launchMode(): LaunchMode {
   return process.env.LAUNCH_MODE === "open" ? "open" : "waitlist";
 }
 
+/** The Pro window (a purchase button) only shows once neb is open and billing is real. */
+export function showPro(): boolean {
+  return launchMode() === "open" && process.env.BILLING_ENABLED === "true";
+}
+
 /** Where "Get neb" goes: the public download page (no account needed; sign-up is in the app). */
 export function getNebUrl(): string {
   const site = (process.env.NEXT_PUBLIC_SITE_URL || "https://myneb.si").replace(/\/$/, "");

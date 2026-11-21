@@ -36,40 +36,43 @@ export const FILM_WINDOW = String.raw`<section class="win film-win" aria-labelle
 </div>
 </section>`;
 
-export const DEMO_WINDOW = String.raw`<section class="win film-win" aria-labelledby="demo-h">${tb("neb_preview.exe", "ink")}
-  <h2 class="sr" id="demo-h">a preview: circling a formula and asking about it</h2>
-  <div class="frame demo" role="img" aria-label="someone circles the formula f prime of x equals 2x, asks what it means, and neb answers that it is the slope at every point">
-    <div class="scr-doc"><p class="dh">calculus · week 3</p><p>the derivative of a function tells you how fast it changes.</p>
-      <p class="fx"><span class="circ-t">f′(x) = 2x</span><svg class="circ" viewBox="0 0 100 60" preserveAspectRatio="none"><path pathLength="1" d="M70 8 C40 0 6 10 6 32 C6 54 50 60 78 50 C98 42 96 14 64 6"/></svg></p>
-      <p>for f(x) = x², the slope at x = 3 is …</p></div>
-    <span class="ask">🎙 “what does this actually mean?”</span>
-    <span class="bub">it’s the slope at every point. at x = 3 the curve climbs 6 for every 1 across.</span>
-    ${cursor("c-demo")}
-  </div>
+export const DEMO_WINDOW = String.raw`<section class="win film-win" aria-labelledby="soon-h">${tb("neb_film.mp4", "ink")}
+  <div class="frame soon"><h2 id="soon-h">the film lands soon.</h2><p>59 seconds of neb, right here.</p></div>
 </section>`;
 
 const FEATURES = String.raw`
 <section class="features" aria-labelledby="feat-h"><h2 class="kick" id="feat-h">what neb does</h2>
   <section class="win feat" id="ft-circle" data-feature="circle_and_ask" aria-labelledby="ft-circle-h">${tb("circle_and_ask.exe", "teal")}
-    <div class="mini m-circle" aria-hidden="true"><span class="word">photosynthesis<svg class="circ" viewBox="0 0 100 60" preserveAspectRatio="none"><path pathLength="1" d="M70 8 C40 0 6 10 6 32 C6 54 50 60 78 50 C98 42 96 14 64 6"/></svg></span><span class="note-chip">saved → biology · ch 2</span>${cursor("c1")}</div>
+    <div class="mini m-circle" aria-hidden="true"><span class="word">PV = FV / (1 + rt)<svg class="circ" viewBox="0 0 100 60" preserveAspectRatio="none"><path pathLength="1" d="M70 8 C40 0 6 10 6 32 C6 54 50 60 78 50 C98 42 96 14 64 6"/></svg></span><span class="note-chip">saved → finance · ch 3</span>${cursor("c1")}</div>
     <div class="pad"><span class="badge now">available now</span><h3 id="ft-circle-h">circle and ask</h3>
       <p>circle a word, a graph, or a whole page. ask out loud in bengali, french or english. neb explains it and draws right on your screen, then saves the moment to the right notebook chapter so you can replay it.</p></div>
   </section>
   <section class="win feat" id="ft-show" data-feature="show_me" aria-labelledby="ft-show-h">${tb("show_me.exe", "sand")}
     <div class="mini m-show" aria-hidden="true"><div class="tools"><i></i><i></i><i class="lit"></i><i></i></div><span class="step">step 2 of 3 · flip to back</span><div class="shirt"><span>logo</span></div>${cursor("c2")}</div>
-    <div class="pad"><span class="badge now">available now</span><h3 id="ft-show-h">show me</h3>
+    <div class="pad"><span class="badge dev">in development</span><h3 id="ft-show-h">show me</h3>
       <p>stuck in an app? ask how. neb lights up the way, step by step — like flipping a shirt to the back and putting your logo on it — and you click. each time, it helps a little less, until you don't need it.</p></div>
   </section>
   <section class="win feat" id="ft-catch" data-feature="catch_me" aria-labelledby="ft-catch-h">${tb("catch_me.sys", "ink")}
     <div class="mini m-catch" aria-hidden="true"><code>DROP TABLE customers;</code><span class="run">▶ run on prod</span><span class="stop">wait. this is the live database.</span>${cursor("c3")}</div>
-    <div class="pad"><span class="badge now">available now</span><h3 id="ft-catch-h">catch me</h3>
+    <div class="pad"><span class="badge dev">in development</span><h3 id="ft-catch-h">catch me</h3>
       <p>about to run DROP TABLE on the live database, send an email that says 'attached' with nothing attached, or reply-all to 43 people? neb sees where your mouse is heading and stops you first. runs on your computer.</p></div>
   </section>
   <section class="win feat" id="ft-do" data-feature="do_it" aria-labelledby="ft-do-h">${tb("do_it.exe", "teal")}
     <div class="mini m-do" aria-hidden="true"><ul><li><s>IMG_0412.jpg</s> beach_01.jpg</li><li><s>IMG_0413.jpg</s> beach_02.jpg</li><li><s>IMG_0414.jpg</s> beach_03.jpg</li></ul><span class="replay">◀◀ replay · 2s</span></div>
-    <div class="pad"><span class="badge now">available now</span><h3 id="ft-do-h">do it</h3>
+    <div class="pad"><span class="badge dev">in development</span><h3 id="ft-do-h">do it</h3>
       <p>the busywork you don't need to learn: save a recipe to your recipe book, find your lease pdf, rename 40 photos. neb does it, then shows a 2-second replay of what it did, so you're never in the dark.</p></div>
   </section>
+</section>`;
+
+/** Only rendered when LAUNCH_MODE=open and BILLING_ENABLED=true (app/page.tsx). */
+export const PRO_WINDOW = String.raw`<section class="pro" aria-labelledby="pro-h">
+  <div class="win">${tb("neb_pro.exe", "ink")}
+    <div class="pad" id="pro-b">
+      <h2 id="pro-h">neb pro</h2>
+      <p class="price"><b>$19</b>/month</p>
+      <p>for people who use neb every day.</p>
+      <button class="btn go" type="button" id="b-pro">upgrade to pro – $19/month</button>
+    </div></div>
 </section>`;
 
 export const HOME_HTML = String.raw`${SPRITES}
@@ -114,7 +117,7 @@ ${FEATURES}
     <div class="pad faq"><h2 class="sr" id="faq-h">questions</h2>
       <details open><summary>what is neb?</summary><p>a cursor that understands anything you circle on your screen. it explains, shows you how, catches mistakes and does the chores.</p></details>
       <details><summary>will it just do things for me?</summary><p>the busywork, yes, and it shows you a replay of what it did. anything worth learning, it shows you the way and you do it.</p></details>
-      <details><summary>what works today?</summary><p>all of it: circle and ask, show me, catch me and do it, plus the notebook and the handwriting check.</p></details>
+      <details><summary>what works today vs what's coming?</summary><p>circle and ask, the notebook and the handwriting check work today. show me, catch me and do it are in development.</p></details>
       <details><summary>when can i get it?</summary><p>soon. the waitlist gets in first, and we'll email you once when it's ready.</p></details>
       <details><summary>which computers?</summary><p>windows first. mac is coming soon.</p></details>
       <details><summary>which languages?</summary><p>we've tested bengali, french and english.</p></details>
@@ -124,15 +127,7 @@ ${FEATURES}
   </section>
 </div>
 
-<section class="pro" aria-labelledby="pro-h">
-  <div class="win">${tb("neb_pro.exe", "ink")}
-    <div class="pad" id="pro-b">
-      <h2 id="pro-h">neb pro</h2>
-      <p class="price"><b>$19</b>/month</p>
-      <p>for people who use neb every day.</p>
-      <button class="btn go" type="button" id="b-pro">upgrade to pro – $19/month</button>
-    </div></div>
-</section>
+<!--PRO-->
 
 <section class="win final" id="join" aria-labelledby="final-h">${tb("join_waitlist.exe")}
   <div class="pad"><h2 id="final-h">be first in.</h2>

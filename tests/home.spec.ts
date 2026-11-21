@@ -49,11 +49,26 @@ test("hero and final forms send their own source", async ({ page }) => {
   expect(sources).toEqual(["hero", "final_cta"]);
 });
 
-test("all four features say available now", async ({ page }) => {
+test("only circle & ask says available now", async ({ page }) => {
   await page.goto("/");
-  await expect(page.locator(".badge")).toHaveCount(4);
-  await expect(page.locator(".badge.now")).toHaveCount(4);
-  for (const id of ["#ft-circle", "#ft-show", "#ft-catch", "#ft-do"]) await expect(page.locator(`${id} .badge`)).toHaveText("available now");
+  await expect(page.locator("#ft-circle .badge")).toHaveText("available now");
+  // Anything else claiming to be shipped fails here.
+  const others = page.locator('[data-feature]:not([data-feature="circle_and_ask"])');
+  await expect(others).toHaveCount(3);
+  for (const t of await others.locator(".badge").allTextContents()) expect(t).toBe("in development");
+  await expect(page.getByText("available now", { exact: true })).toHaveCount(1);
+});
+
+test("pro window is hidden in waitlist mode", async ({ page }) => {
+  await page.goto("/");
+  await expect(page.locator("#b-pro")).toHaveCount(0);
+  await expect(page.getByText("$19")).toHaveCount(0);
+});
+
+test("only one school example: no calculus, no photosynthesis", async ({ page }) => {
+  await page.goto("/");
+  const text = (await page.textContent("body")) ?? "";
+  expect(text).not.toMatch(/derivative|photosynthesis|calculus/i);
 });
 
 test("reduced motion: scenes never start and loops stay paused", async ({ browser }) => {

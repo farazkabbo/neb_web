@@ -222,3 +222,8 @@ footer a{color:inherit}
 .dl-email .row{display:flex;gap:8px}
 .dl-email input[type="email"]{flex:1;min-width:0;padding:8px 10px;font:400 15px var(--f-body);border:1px solid var(--muted);border-radius:6px;background:#fff}
 .dl-email .hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0}
+
+/* film placeholder until the ad is encoded */
+.frame.soon{display:grid;place-content:center;text-align:center;background:radial-gradient(80% 90% at 50% 40%,#2A2350,#0E1A24);color:var(--ivory);padding:24px}
+.frame.soon h2{font:400 clamp(28px,4vw,44px)/1.05 var(--f-disp);margin:0 0 8px}
+.frame.soon p{margin:0;font:500 16px var(--f-ui);color:var(--sky3)}
