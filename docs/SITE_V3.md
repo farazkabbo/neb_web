@@ -63,8 +63,7 @@
 - film plays + seeks per chapter (59s ffmpeg test clip served via page.route, so no real ad needed)
 - screenshots: first screen, playground, bottom at both widths
 
-## need from you
-1. the ad at media-src\neb-ad-final.mp4, and docs\vo-script.txt for captions
-2. CTA follows LAUNCH_MODE again, but I keep LAUNCH_MODE=waitlist (no installer yet). ok?
-3. pro gating stops the fake-door test while in waitlist mode. ok?
-4. I'll draft the bengali + french questions; a native speaker should check them
+## decisions (2026-11-20, "do what is best")
+- build now; "the film lands soon" until scripts/encode-ad.sh runs (npm run encode-ad)
+- stay on LAUNCH_MODE=waitlist (no installer); pro needs open + BILLING_ENABLED (test paused)
+- bengali/french questions are drafts: have a native speaker check public/demos/circle.js Q
