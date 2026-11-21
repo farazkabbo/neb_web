@@ -64,17 +64,17 @@ export function ctaHtml(id: "hero" | "final", mode: LaunchMode, os: Os): string 
   return `<p class="soon-line">${line}</p>${emailForm(`mac-${id}`, "email me")}<p class="micro" id="m-mac-${id}">windows first · mac coming soon</p>`;
 }
 
-/** The film window once scripts/encode-ad.sh has made the files. */
-export const FILM_WINDOW = String.raw`<section class="win film" id="w-film" data-win="neb_film.mp4" aria-labelledby="film-h">${tb("neb_film.mp4", "ink")}
+/** The film window once scripts/encode-ad.sh has made the files (captions only if the .vtt exists). */
+export const filmWindow = (captions: boolean) => String.raw`<section class="win film" id="w-film" data-win="neb_film.mp4" aria-labelledby="film-h">${tb("neb_film.mp4", "ink")}
   <h2 class="sr" id="film-h">the neb film, 59 seconds</h2>
   <div class="frame" id="film-frame">
-    <video class="loop" id="loop" muted loop playsinline preload="metadata" poster="/media/hero-loop.jpg" aria-label="a silent 8 second loop from the neb film">
+    <video class="loop" id="loop" muted loop playsinline preload="metadata" poster="/media/hero-loop-tiny.jpg" aria-label="a silent 8 second loop from the neb film">
       <source src="/media/hero-loop.webm" type="video/webm"><source src="/media/hero-loop.mp4" type="video/mp4"></video>
     <video id="film" playsinline preload="none" poster="/media/neb-ad.jpg" aria-label="the neb film" hidden>
       <source src="/media/neb-ad-720.mp4" type="video/mp4" media="(max-width: 640px)">
       <source src="/media/neb-ad.webm" type="video/webm">
       <source src="/media/neb-ad-1080.mp4" type="video/mp4">
-      <track kind="captions" src="/media/neb-ad.en.vtt" srclang="en" label="english" default>
+      ${captions ? `<track kind="captions" src="/media/neb-ad.en.vtt" srclang="en" label="english" default>` : ""}
     </video>
     <button class="bigplay" type="button" id="b-film"><span class="tri" aria-hidden="true">▶</span> watch the film · 59s</button>
   </div>
@@ -85,7 +85,7 @@ export const FILM_WINDOW = String.raw`<section class="win film" id="w-film" data
       <i class="fill" id="sk-fill"></i>
       ${CHAPTERS.map((c) => `<button type="button" class="mark" data-chapter="${c.id}" data-at="${c.at}" style="left:${((c.at / FILM_SECONDS) * 100).toFixed(2)}%" aria-label="${c.label} at 0:${String(c.at).padStart(2, "0")}"><span>${c.label}</span></button>`).join("")}
     </div>
-    <button type="button" class="sk" id="sk-cc" aria-pressed="true" aria-label="captions">cc</button>
+    ${captions ? `<button type="button" class="sk" id="sk-cc" aria-pressed="true" aria-label="captions">cc</button>` : ""}
     <button type="button" class="sk" id="sk-mute" aria-pressed="false" aria-label="mute">🔊</button>
     <button type="button" class="sk" id="sk-fs" aria-label="fullscreen">⛶</button>
   </div>
@@ -226,8 +226,8 @@ const ICONS = String.raw`<nav class="icons" aria-label="desktop shortcuts">
   <button type="button" class="icon" data-open="w-join"><img src="/media/icon-lock.png" alt="" width="44" height="44"><span>join.exe</span></button>
 </nav>`;
 
-export function homeHtml(opts: { mode: LaunchMode; os: Os; film: boolean; pro: boolean }): string {
-  const { mode, os, film, pro } = opts;
+export function homeHtml(opts: { mode: LaunchMode; os: Os; film: boolean; captions: boolean; pro: boolean }): string {
+  const { mode, os, film, captions, pro } = opts;
   return String.raw`${SPRITES}
 <div class="sky" aria-hidden="true"><div class="night"></div><div class="stars"></div><div class="dawn"></div></div>
 ${ICONS}
@@ -235,7 +235,7 @@ ${ICONS}
 <section class="first" aria-labelledby="hero-h">
   <h1 id="hero-h">your cursor, but it understands.</h1>
   <p class="sub">circle anything on your screen and ask out loud. neb explains it, shows you the way, and catches mistakes before you make them.</p>
-  ${film ? FILM_WINDOW : SOON_WINDOW}
+  ${film ? filmWindow(captions) : SOON_WINDOW}
   <div class="cta" id="cta-hero">${ctaHtml("hero", mode, os)}</div>
 </section>
 ${PLAYGROUND}

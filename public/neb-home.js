@@ -137,7 +137,7 @@ function seekChapter(id){
   startFilm(c?c.at:0);
 }
 document.addEventListener('click',e=>{const s=e.target.closest('[data-seek]');if(s){e.stopPropagation();sound('click');seekChapter(s.dataset.seek)}});
-function setCC(on){if(!film)return;const t=film.textTracks&&film.textTracks[0];if(t)t.mode=on?'showing':'hidden';$('#sk-cc').setAttribute('aria-pressed',String(on))}
+function setCC(on){if(!film)return;const t=film.textTracks&&film.textTracks[0],b=$('#sk-cc');if(t)t.mode=on?'showing':'hidden';if(b)b.setAttribute('aria-pressed',String(on))}
 if(film){
   if(loop&&!RM&&'IntersectionObserver'in window){
     new IntersectionObserver(es=>es.forEach(en=>{if(started)return;en.isIntersecting?loop.play().catch(()=>{}):loop.pause()}),{threshold:.3}).observe(loop);
@@ -165,13 +165,13 @@ if(film){
   trk.addEventListener('keydown',e=>{const k={ArrowRight:5,ArrowLeft:-5}[e.key];if(k){e.preventDefault();film.currentTime=Math.max(0,film.currentTime+k)}if(e.key==='Home'){e.preventDefault();film.currentTime=0}});
   CH.forEach(c=>c.el.addEventListener('click',()=>startFilm(c.at)));
   mute.addEventListener('click',()=>{film.muted=!film.muted;mute.setAttribute('aria-pressed',String(film.muted));mute.textContent=film.muted?'🔇':'🔊';mute.setAttribute('aria-label',film.muted?'unmute':'mute');if(!film.muted)setCC(true)});
-  $('#sk-cc').addEventListener('click',()=>{const t=film.textTracks[0];setCC(!(t&&t.mode==='showing'))});
+  const ccb=$('#sk-cc');if(ccb)ccb.addEventListener('click',()=>{const t=film.textTracks[0];setCC(!(t&&t.mode==='showing'))});
   $('#sk-fs').addEventListener('click',()=>{document.fullscreenElement?document.exitFullscreen():fwin.requestFullscreen&&fwin.requestFullscreen().catch(()=>{})});
   fwin.addEventListener('keydown',e=>{
     if(!started||e.target.closest('input'))return;
     const k=e.key.toLowerCase();
     if(k===' '||k==='k'){if(e.target.tagName==='BUTTON'&&k===' ')return;e.preventDefault();toggle()}
-    else if(k==='m')mute.click();else if(k==='c')$('#sk-cc').click();else if(k==='f')$('#sk-fs').click();
+    else if(k==='m')mute.click();else if(k==='c'&&ccb)ccb.click();else if(k==='f')$('#sk-fs').click();
     else if(e.key==='ArrowRight'&&e.target!==trk)film.currentTime+=5;else if(e.key==='ArrowLeft'&&e.target!==trk)film.currentTime-=5;
   });
 }

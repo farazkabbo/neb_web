@@ -1,6 +1,6 @@
 // circle_and_ask.exe: hold Alt (or turn on ✎ circle) and draw a loop; neb answers with scripted
 // labels. Keyboard: Tab to a part of the formula, Enter circles it, Esc clears.
-const Q = { en: "what does this mean?", bn: "এটার মানে কী?", fr: "ça veut dire quoi ?" };
+const Q = { en: "what does this mean?", bn: "এটা কী বোঝায়?", fr: "ça veut dire quoi ?" };
 const ANSWERS = {
   fv: { text: "FV is the future value: what the money is worth later. here, $1,100 after 2 years.", labels: [["fv", "future value"]] },
   pv: { text: "PV is the present value: what it's worth today. work back from FV and you get $1,000.", labels: [["pv", "present value"]] },

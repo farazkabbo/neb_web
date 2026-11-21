@@ -7,7 +7,7 @@
 # Once hero-loop.mp4 exists, the next build shows the film window instead of "the film lands soon".
 set -euo pipefail
 cd "$(dirname "$0")/.."
-SRC=media-src/neb-ad-final.mp4 OUT=public/media
+SRC=${SRC:-media-src/neb-ad-final.mp4} OUT=public/media   # SRC=path to encode another file
 LOOP_AT=${LOOP_AT:-10}   # where the 8 s silent loop starts (seconds); pick a moment that loops well
 [ -f "$SRC" ] || { echo "missing $SRC"; exit 1; }
 command -v ffmpeg >/dev/null || { echo "ffmpeg not found"; exit 1; }
@@ -21,6 +21,8 @@ echo "hero loop";   $FF -ss "$LOOP_AT" -t 8 -i "$SRC" -an -vf "scale=-2:720" -c:
                     $FF -ss "$LOOP_AT" -t 8 -i "$SRC" -an -vf "scale=-2:720" -c:v libvpx-vp9 -crf 38 -b:v 0 -row-mt 1 "$OUT/hero-loop.webm"
 echo "posters";     $FF -ss 1 -i "$OUT/neb-ad-1080.mp4" -frames:v 1 -q:v 4 "$OUT/neb-ad.jpg"
                     $FF -i "$OUT/hero-loop.mp4" -frames:v 1 -q:v 4 "$OUT/hero-loop.jpg"
+                    # the loop's poster on the page is tiny on purpose: the headline stays the LCP
+                    $FF -i "$OUT/hero-loop.mp4" -frames:v 1 -vf "scale=64:-2" -q:v 5 "$OUT/hero-loop-tiny.jpg"
 
 # Captions: lines like "0:03.5 | circle anything on your screen" (start time | text). Each caption
 # runs until the next one starts; the last runs to the end of the film.

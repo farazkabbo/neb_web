@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     images: ["/media/og.png"],
     // The film, once scripts/encode-ad.sh has made it.
     ...(existsSync(path.join(process.cwd(), "public", "media", "neb-ad-720.mp4"))
-      ? { videos: [{ url: "/media/neb-ad-720.mp4", type: "video/mp4", width: 1280, height: 720 }] }
+      ? { videos: [{ url: new URL("/media/neb-ad-720.mp4", process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"), type: "video/mp4", width: 1280, height: 720 }] }
       : {}),
   },
 };

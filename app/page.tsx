@@ -12,13 +12,14 @@ import { homeHtml, osOf } from "./home-markup";
 export const dynamic = "force-dynamic";
 
 /** The film window shows once scripts/encode-ad.sh has run (NEB_FORCE_FILM=1 for the tests). */
-const hasFilm = () =>
-  process.env.NEB_FORCE_FILM === "1" || existsSync(path.join(process.cwd(), "public", "media", "hero-loop.mp4"));
+const media = (file: string) => existsSync(path.join(process.cwd(), "public", "media", file));
+const hasFilm = () => process.env.NEB_FORCE_FILM === "1" || media("hero-loop.mp4");
+const hasCaptions = () => process.env.NEB_FORCE_FILM === "1" || media("neb-ad.en.vtt");
 
 export default async function Home() {
   const mode = launchMode();
   const os = osOf((await headers()).get("user-agent") ?? "");
-  const html = homeHtml({ mode, os, film: hasFilm(), pro: showPro() });
+  const html = homeHtml({ mode, os, film: hasFilm(), captions: hasCaptions(), pro: showPro() });
   return (
     <>
       <div id="neb-root" data-mode={mode} dangerouslySetInnerHTML={{ __html: html }} />
